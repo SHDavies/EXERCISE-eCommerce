@@ -10,13 +10,14 @@ app.service('mainService', function($http, $q) {
 		return deferred.promise;
 	}
 
-	this.addProduct = function(name, price) {
+	this.addProduct = function(name, description, price) {
 		var deferred = $q.defer();
 		$http({
 			url: 'http://localhost:3000/products',
 			method: 'POST',
 			data: {
 				"name": name,
+				"description": description,
 				"price": price
 			}
 		}).then(function(response) {
@@ -25,14 +26,16 @@ app.service('mainService', function($http, $q) {
 		return deferred.promise;
 	}
 
-	this.updateProduct = function(existing, newName, newPrice) {
+	this.updateProduct = function(existing, newName, newDescription, newPrice) {
 		var deferred = $q.defer();
+		if (!newPrice) newPrice = existing.price;
 		$http({
-			url: 'http://localhost:3000/products?name=' + existing.name,
+			url: 'http://localhost:3000/products/' + existing._id,
 			method: 'PUT',
 			data: {
 				name: newName,
-				price: newPrice
+				description: newDescription,
+				price: parseInt(newPrice)
 			}
 		}).then(function(response) {
 			deferred.resolve(response.data);
@@ -43,7 +46,7 @@ app.service('mainService', function($http, $q) {
 	this.deleteProduct = function(toDelete) {
 		var deferred = $q.defer();
 		$http({
-			url: 'http://localhost:3000/products?name=' + toDelete.name,
+			url: 'http://localhost:3000/products/' + existing._id,
 			method: 'DELETE'
 		}).then(function(response) {
 			deferred.resolve(response.data);

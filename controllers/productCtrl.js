@@ -4,7 +4,10 @@ module.exports = {
   create: function(req, res) {
     var newProduct = new Product(req.body);
     newProduct.save(function(err, result) {
-      if (err) return res.status(500).json(err);
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
       else res.json(result);
     })
   },

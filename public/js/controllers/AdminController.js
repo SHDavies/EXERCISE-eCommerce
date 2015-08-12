@@ -6,7 +6,7 @@ app.controller('AdminController', function($scope, mainService) {
 	}();
 
 	$scope.addProduct = function() {
-		mainService.addProduct($scope.newName, $scope.newPrice)
+		mainService.addProduct($scope.newName, $scope.newDescription, $scope.newPrice)
 		.then(function(results) {
 			var productName = results.name;
 			mainService.getProducts().then(function(results) {
@@ -17,14 +17,12 @@ app.controller('AdminController', function($scope, mainService) {
 	}
 
 	$scope.updateProduct = function() {
-		mainService.updateProduct($scope.existingProduct, $scope.updateName, $scope.updatePrice)
+		mainService.updateProduct($scope.existingProduct, $scope.updateName, $scope.updateDescription, $scope.updatePrice)
 		.then(function(results) {
-			if (results.nModified === 1) {
-				mainService.getProducts().then(function(results) {
+			mainService.getProducts().then(function(results) {
 					$scope.products = results;
-				alert("You have successfully updated: " + $scope.existingProduct.name);
-				})
-			}
+			alert("You have successfully updated: " + $scope.existingProduct.name);
+			})
 		})
 	}
 
