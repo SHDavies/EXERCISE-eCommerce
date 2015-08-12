@@ -31,6 +31,9 @@ app.controller('AdminController', function($scope, mainService) {
 	$scope.deleteProduct = function() {
 		mainService.deleteProduct($scope.deletedProduct).then(function(result) {
 			if (result.n === 1) {
+				mainService.getProducts().then(function(results) {
+					$scope.products = results;
+				});
 				alert("You have successfully deleted the product");
 			}
 		})
