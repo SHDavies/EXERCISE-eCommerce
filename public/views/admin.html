@@ -1,0 +1,24 @@
+<h1>Add product:</h1>
+<form ng-submit="addProduct()">
+	<input type="text" ng-model="newName" placeholder="Product name..." required />
+	<input type="number" ng-model="newPrice" placeholder="Product price..." required />
+	<button type="submit">Submit</button>
+</form>
+
+<h1>Update product:</h1>
+<form ng-submit="updateProduct()">
+	<select ng-model="existingProduct" ng-options="product.name for product in products" required />
+		<option value="">--Product--</option>
+	</select>
+	<input type="text" ng-model="updateName" placeholder="New product name..." required />
+	<input type="number" ng-model="updatePrice" placeholder="New price..." required />
+	<button type="submit">Submit</button>
+</form>
+
+<h1>Delete product:</h1>
+<form ng-submit="deleteProduct()">
+	<select ng-model="deletedProduct" ng-options="product.name for product in products" required />
+		<option value="">--Product--</option>
+	</select>
+	<button type="submit">Delete</button>
+</form>
