@@ -46,7 +46,7 @@ app.service('mainService', function($http, $q) {
 	this.deleteProduct = function(toDelete) {
 		var deferred = $q.defer();
 		$http({
-			url: 'http://localhost:3000/products/' + existing._id,
+			url: 'http://localhost:3000/products/' + toDelete._id,
 			method: 'DELETE'
 		}).then(function(response) {
 			deferred.resolve(response.data);
